@@ -32,7 +32,7 @@ desafio-hermes-reply-fase4/
 
 # 🗂️ ESTRUTURA DO README (Modelo)
 
-````markdown
+
 # Desafio Hermes Reply - Fase 4 🚀
 
 ## 💡 Descrição
@@ -109,7 +109,6 @@ void loop() {
 
 MIT License
 
-```
 
 ---
 
