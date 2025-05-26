@@ -18,6 +18,9 @@ desafio-hermes-reply-fase4/
 ├── 📁 dados/
 │   ├── dados_coletados.csv     # Dados coletados da simulação
 │   └── dados_exemplares.xlsx   # Dados de exemplo (se usar Kaggle ou gerar manualmente)
+├── 📁 sensores/
+│   ├── dados_coletados.csv     # Dados coletados da simulação
+│   └── dados_exemplares.xlsx   # Dados de exemplo (se usar Kaggle ou gerar manualmente)
 ├── 📁 analise/
 │   ├── grafico_temperatura.png # Gráficos gerados na análise
 │   ├── analise.ipynb           # Código Python ou R para análise dos dados
@@ -26,6 +29,7 @@ desafio-hermes-reply-fase4/
 │   └── monitor_serial.png      # Print do monitor serial com dados
 ├── README.md                   # Arquivo principal com resumo do projeto
 └── LICENSE                     # (Opcional) Licença do projeto
+└── .gitignore                     # (Opcional) Licença do projeto
 ```
 
 ---
