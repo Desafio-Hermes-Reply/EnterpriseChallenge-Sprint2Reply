@@ -55,12 +55,16 @@ Este projeto simula um ambiente industrial digitalizado, utilizando o ESP32 e se
 ## 🏗️ Circuito
 - **Plataforma:** Wokwi / PlatformIO / VSCode
 - **Sensores utilizados:**
-  - Sensor de Temperatura (DHT22) 🌡️
-    - Justificativa: Monitoramento térmico é essencial em ambientes industriais.
-  - Sensor de Vibração (SW-420) 📳
-    - Justificativa: Identificar anomalias em motores e máquinas.
-  - Sensor de Luminosidade (LDR) 💡
-    - Justificativa: Controle de ambientes e segurança.
+
+| Sensor                         | Função                                             | Justificativa Técnica                                                                                                     |
+|-------------------------------|---------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|
+| **DHT22** (Temperatura e Umidade) | Mede temperatura e umidade do ambiente.            | Boa precisão, baixo custo, comunicação digital simples (One-Wire) e disponível na Wokwi, usado em controle climático e conservação de materiais. |
+| **LDR** (Sensor de Luminosidade)  | Mede o nível de luz ambiente.                      | Sensor simples, barato e suficiente para detectar variações de luminosidade, fácil de simular no Wokwi, ideal para detectar falhas de iluminação.    |
+| **SW-420** (Sensor de Vibração)   | Detecta vibrações anormais em motores ou equipamentos. | Sensor digital simples e eficiente para detectar movimentos bruscos, muito usado em protótipos para simular falhas mecânicas, fácil de integrar com ESP32.  |
+| **MQ-135** (Sensor de Qualidade do Ar) | Avalia a presença de gases poluentes como CO₂, amônia e fumaça. | Sensor analógico com boa sensibilidade a vários gases tóxicos e poluentes, ideal para simular controle ambiental e segurança industrial. Exige calibração.   |
+
+
+
 
 ### 🔌 Esquema do Circuito
 ![Esquema do Circuito](./circuito/circuito.png)
