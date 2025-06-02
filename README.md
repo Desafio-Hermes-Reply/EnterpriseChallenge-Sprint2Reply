@@ -55,19 +55,175 @@ Este projeto simula um ambiente industrial digitalizado, utilizando o ESP32 e se
 ## 🏗️ Circuito
 - **Plataforma:** Wokwi / PlatformIO / VSCode
 - **Sensores utilizados:**
+| Finalidade                          | Sensor                                       | Descrição                                                                 |
+|--------------------------------------|---------------------------------------------|---------------------------------------------------------------------------|
+| **Temperatura**                     | DS18B20, PT100 com módulo ADC               | Monitoramento de temperatura de motores, rolamentos e ambientes.          |
+| **Vibração**                        | ADXL345, MPU6050, SW-420                    | Detecção de vibrações anormais que indicam falhas mecânicas.              |
+| **Corrente elétrica**               | SCT-013, ACS712                             | Monitoramento de consumo e proteção contra sobrecarga.                    |
+| **Rotação e Velocidade**            | Encoder Óptico, Encoder Magnético AS5600    | Medição de velocidade de eixos e motores.                                 |
+| **Proximidade e Posição**           | Sensor Indutivo, Óptico, ou Reed Switch     | Detecção de presença, posição ou fim de curso de componentes.             |
+| **Pressão**                         | Sensor de Pressão Industrial (4-20mA)       | Monitoramento de sistemas pneumáticos ou hidráulicos.                     |
+| **Nível de líquidos**               | Sensor Ultrasônico (HC-SR04), Sensor de Boia| Controle e monitoramento de tanques e reservatórios.                      |
+| **Qualidade do Ar**                 | MQ-135, SGP30                               | Detecção de gases tóxicos ou contaminantes no ambiente industrial.        |
+| **Umidade**                         | DHT22, SHT31                                | Controle ambiental em ambientes sensíveis.                                |
+| **Tensão**                          | Sensor de Tensão ZMPT101B                   | Monitoramento de tensão elétrica para diagnóstico e segurança.            |
+| **Detecção de Fumaça ou Incêndio**  | MQ-2, Sensor de Chama IR                    | Sistemas de segurança contra incêndios.                                   |
 
-| Sensor                         | Função                                             | Justificativa Técnica                                                                                                     |
-|-------------------------------|---------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|
-| **DHT22** (Temperatura e Umidade) | Mede temperatura e umidade do ambiente.            | Boa precisão, baixo custo, comunicação digital simples (One-Wire) e disponível na Wokwi, usado em controle climático e conservação de materiais. |
-| **LDR** (Sensor de Luminosidade)  | Mede o nível de luz ambiente.                      | Sensor simples, barato e suficiente para detectar variações de luminosidade, fácil de simular no Wokwi, ideal para detectar falhas de iluminação.    |
-| **SW-420** (Sensor de Vibração)   | Detecta vibrações anormais em motores ou equipamentos. | Sensor digital simples e eficiente para detectar movimentos bruscos, muito usado em protótipos para simular falhas mecânicas, fácil de integrar com ESP32.  |
-| **MQ-135** (Sensor de Qualidade do Ar) | Avalia a presença de gases poluentes como CO₂, amônia e fumaça. | Sensor analógico com boa sensibilidade a vários gases tóxicos e poluentes, ideal para simular controle ambiental e segurança industrial. Exige calibração.   |
+
+### Tabela de Sensores para Máquinas Industriais com ESP32
 
 
+| **Sensor**                   | **Descrição**                                           | **Porta ESP32**    | **Alimentação** | **Código Exemplo** |
+|------------------------------|---------------------------------------------------------|--------------------|-----------------|--------------------|
+| **DS18B20 (Temperatura)**    | Sensor digital de temperatura, resistente               | D4 (GPIO4)         | 3.3V ou 5V      | `DallasTemperature` + `OneWire` |
+| **SW-420 (Vibração)**        | Sensor para detecção de impactos e vibrações             | D5 (GPIO5)         | 3.3V ou 5V      | `digitalRead` para detectar vibração |
+| **SCT-013 (Corrente)**       | Transformador de corrente não-invasivo                   | GPIO36 (ADC1_CH0)  | -               | `analogRead` para tensão proporcional |
+| **Encoder Óptico (Rotação)** | Medição de rotação, RPM ou ângulo                        | D18 (GPIO18), D19 (GPIO19) | 5V      | `attachInterrupt` para contagem de pulsos |
+| **HC-SR04 (Nível)**          | Sensor ultrassônico para medição de distância            | TRIG: D12 (GPIO12), ECHO: D14 (GPIO14) | 5V | `pulseIn` para calcular distância |
+| **4-20mA (Pressão)**         | Sensor industrial padrão de pressão com saída analógica | GPIO39 (ADC1_CH3)  | conforme sensor (geralmente 24V) | `analogRead` com resistor shunt de 250Ω |
+```
 
+---
 
-### 🔌 Esquema do Circuito
-![Esquema do Circuito](./circuito/circuito.png)
+## Códigos por Sensor
+
+### **DS18B20 - Temperatura**
+
+```cpp
+#include <OneWire.h>
+#include <DallasTemperature.h>
+
+#define ONE_WIRE_BUS 4
+OneWire oneWire(ONE_WIRE_BUS);
+DallasTemperature sensors(&oneWire);
+
+void setup() {
+  Serial.begin(115200);
+  sensors.begin();
+}
+
+void loop() {
+  sensors.requestTemperatures();
+  Serial.println(sensors.getTempCByIndex(0));
+  delay(1000);
+}
+```
+
+---
+
+### **SW-420 - Vibração**
+
+```cpp
+#define VIBRATION_PIN 5
+
+void setup() {
+  Serial.begin(115200);
+  pinMode(VIBRATION_PIN, INPUT);
+}
+
+void loop() {
+  if (digitalRead(VIBRATION_PIN) == LOW) {
+    Serial.println("Vibração detectada!");
+  }
+  delay(200);
+}
+```
+
+---
+
+### **SCT-013 - Corrente**
+
+```cpp
+#define CURRENT_SENSOR_PIN 36
+
+void setup() {
+  Serial.begin(115200);
+}
+
+void loop() {
+  int sensorValue = analogRead(CURRENT_SENSOR_PIN);
+  float voltage = sensorValue * (3.3 / 4095.0);
+  Serial.println(voltage);
+  delay(1000);
+}
+```
+
+---
+
+### **Encoder Óptico - Rotação**
+
+```cpp
+#define ENCODER_A 18
+#define ENCODER_B 19
+
+volatile int encoderCount = 0;
+
+void IRAM_ATTR handleEncoder() {
+  encoderCount++;
+}
+
+void setup() {
+  Serial.begin(115120);
+  pinMode(ENCODER_A, INPUT_PULLUP);
+  pinMode(ENCODER_B, INPUT_PULLUP);
+  attachInterrupt(digitalPinToInterrupt(ENCODER_A), handleEncoder, RISING);
+}
+
+void loop() {
+  Serial.println(encoderCount);
+  delay(1000);
+}
+```
+
+---
+
+### **HC-SR04 - Nível**
+
+```cpp
+#define TRIG_PIN 12
+#define ECHO_PIN 14
+
+void setup() {
+  Serial.begin(115200);
+  pinMode(TRIG_PIN, OUTPUT);
+  pinMode(ECHO_PIN, INPUT);
+}
+
+void loop() {
+  digitalWrite(TRIG_PIN, LOW);
+  delayMicroseconds(2);
+  digitalWrite(TRIG_PIN, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(TRIG_PIN, LOW);
+
+  long duration = pulseIn(ECHO_PIN, HIGH);
+  float distance = (duration * 0.0343) / 2;
+
+  Serial.println(distance);
+  delay(1000);
+}
+```
+
+---
+
+### **4-20mA - Pressão**
+
+```cpp
+#define PRESSURE_SENSOR_PIN 39
+
+void setup() {
+  Serial.begin(115200);
+}
+
+void loop() {
+  int sensorValue = analogRead(PRESSURE_SENSOR_PIN);
+  float voltage = sensorValue * (3.3 / 4095.0);
+  float current = voltage / 250.0; // Resistor shunt de 250Ω
+  Serial.print("Corrente: ");
+  Serial.println(current, 3);
+  delay(1000);
+}
+```
 
 ## 🧑‍💻 Código
 - Linguagem: C++ (Arduino IDE)
@@ -95,6 +251,96 @@ void loop() {
   delay(2000);
 }
 ````
+
+
+
+
+
+### 🔌 Esquema do Circuito
+
+#### 1. DS18B20 - Sensor de Temperatura
+
+- **VCC** → 3.3V (ou 5V)
+- **GND** → GND
+- **DATA** → D4 (GPIO4)
+- **OBS**: Adicionar resistor de **4.7kΩ** entre **DATA** e **VCC** (pull-up).
+
+---
+
+#### 2. SW-420 - Sensor de Vibração
+
+- **VCC** → 3.3V (ou 5V)
+- **GND** → GND
+- **DO (Saída Digital)** → D5 (GPIO5)
+
+---
+
+#### 3. SCT-013 - Sensor de Corrente
+
+- **Buraco central** → passar o fio fase da carga.
+- **Saída de tensão** → A0 (GPIO36) — entrada analógica.
+- **OBS**: Verificar se o modelo possui carga interna; se não, adicionar resistor de carga conforme especificações (ex.: 33Ω).
+
+---
+
+#### 4. Encoder Óptico - Medidor de Rotação
+
+- **VCC** → 5V
+- **GND** → GND
+- **OUT A** → D18 (GPIO18)
+- **OUT B** → D19 (GPIO19)
+
+---
+
+#### 5. HC-SR04 - Sensor Ultrassônico (Nível)
+
+- **VCC** → 5V
+- **GND** → GND
+- **TRIG** → D12 (GPIO12)
+- **ECHO** → D14 (GPIO14)
+- **OBS**: Adicionar divisor de tensão no pino **ECHO** (pois ele gera 5V e o ESP32 aceita até 3.3V).
+
+---
+
+#### 6. Sensor de Pressão - Saída 4-20mA
+
+- **Saída +** → 24V (fonte externa)
+- **Saída -** → uma ponta do resistor de **250Ω** → GND da fonte.
+- **Entre o resistor** → GPIO39 (ADC1_CH3).
+- **OBS**: A tensão sobre o resistor será proporcional à corrente de loop (1V a 5V).
+
+---
+
+
+
+## 🧑‍💻 Código
+- Linguagem: C++ (Arduino IDE)
+- Principais funções:
+  - Leitura de sensores
+  - Impressão no Monitor Serial
+  - Simulação de dados
+
+```cpp
+#include <DHT.h>
+
+#define DHTPIN 15
+#define DHTTYPE DHT22
+DHT dht(DHTPIN, DHTTYPE);
+
+void setup() {
+  Serial.begin(9600);
+  dht.begin();
+}
+
+void loop() {
+  float temp = dht.readTemperature();
+  Serial.print("Temperatura: ");
+  Serial.println(temp);
+  delay(2000);
+}
+````
+
+
 
 ## 🔍 Dados Coletados
 
