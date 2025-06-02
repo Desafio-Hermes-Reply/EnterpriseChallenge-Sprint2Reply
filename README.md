@@ -54,7 +54,9 @@ Este projeto simula um ambiente industrial digitalizado, utilizando o ESP32 e se
 
 ## 🏗️ Circuito
 - **Plataforma:** Wokwi / PlatformIO / VSCode
-- **Sensores utilizados:**
+
+### **Sensores utilizados:**
+
 | Finalidade                          | Sensor                                       | Descrição                                                                 |
 |--------------------------------------|---------------------------------------------|---------------------------------------------------------------------------|
 | **Temperatura**                     | DS18B20, PT100 com módulo ADC               | Monitoramento de temperatura de motores, rolamentos e ambientes.          |
