@@ -8,10 +8,9 @@ Em resumo, os sensores são os elementos-chave que impulsionam a transformação
 
 ---
 
-# ✅ ESTRUTURA DO PROJETO (GitHub)
+## ESTRUTURA DO PROJETO (GitHub)
 
-```
-desafio-hermes-reply-fase4/
+```desafio-hermes-reply-fase4/
 ├── 📁 circuito/
 │   ├── circuito.png            # Print do circuito montado no Wokwi (ou plataforma utilizada)
 │   └── esquema.pdf             # (Opcional) Esquema elétrico desenhado
@@ -38,21 +37,21 @@ desafio-hermes-reply-fase4/
 
 ---
 
-# 🗂️ ESTRUTURA DO README (Modelo)
+## Desafio Hermes Reply - Fase 4 🚀
 
+## Descrição
 
-# Desafio Hermes Reply - Fase 4 🚀
-
-## 💡 Descrição
 Este projeto simula um ambiente industrial digitalizado, utilizando o ESP32 e sensores virtuais. A proposta é coletar dados de sensores simulados, analisar e gerar insights, replicando cenários da Indústria 4.0.
 
-## 🧠 Objetivos
+## Objetivos
+
 - Construir um circuito simulado com ESP32.
 - Realizar a leitura de sensores virtuais.
 - Coletar e exportar dados para análise.
 - Gerar gráficos e insights iniciais.
 
-## 🏗️ Circuito
+## Circuito
+
 - **Plataforma:** Wokwi / PlatformIO / VSCode
 
 ### **Sensores utilizados:**
@@ -71,9 +70,7 @@ Este projeto simula um ambiente industrial digitalizado, utilizando o ESP32 e se
 | **Tensão**                          | Sensor de Tensão ZMPT101B                   | Monitoramento de tensão elétrica para diagnóstico e segurança.            |
 | **Detecção de Fumaça ou Incêndio**  | MQ-2, Sensor de Chama IR                    | Sistemas de segurança contra incêndios.                                   |
 
-
 ### Tabela de Sensores para Máquinas Industriais com ESP32
-
 
 | **Sensor**                   | **Descrição**                                           | **Porta ESP32**    | **Alimentação** | **Código Exemplo** |
 |------------------------------|---------------------------------------------------------|--------------------|-----------------|--------------------|
@@ -83,7 +80,6 @@ Este projeto simula um ambiente industrial digitalizado, utilizando o ESP32 e se
 | **Encoder Óptico (Rotação)** | Medição de rotação, RPM ou ângulo                        | D18 (GPIO18), D19 (GPIO19) | 5V      | `attachInterrupt` para contagem de pulsos |
 | **HC-SR04 (Nível)**          | Sensor ultrassônico para medição de distância            | TRIG: D12 (GPIO12), ECHO: D14 (GPIO14) | 5V | `pulseIn` para calcular distância |
 | **4-20mA (Pressão)**         | Sensor industrial padrão de pressão com saída analógica | GPIO39 (ADC1_CH3)  | conforme sensor (geralmente 24V) | `analogRead` com resistor shunt de 250Ω |
-```
 
 ---
 
@@ -227,7 +223,8 @@ void loop() {
 }
 ```
 
-## 🧑‍💻 Código
+## Código
+
 - Linguagem: C++ (Arduino IDE)
 - Principais funções:
   - Leitura de sensores
@@ -252,13 +249,9 @@ void loop() {
   Serial.println(temp);
   delay(2000);
 }
-````
+```
 
-
-
-
-
-### 🔌 Esquema do Circuito
+### Esquema do Circuito
 
 #### 1. DS18B20 - Sensor de Temperatura
 
@@ -313,9 +306,8 @@ void loop() {
 
 ---
 
+### Código
 
-
-## 🧑‍💻 Código
 - Linguagem: C++ (Arduino IDE)
 - Principais funções:
   - Leitura de sensores
@@ -340,68 +332,72 @@ void loop() {
   Serial.println(temp);
   delay(2000);
 }
-````
-
-
+```
 
 ## 🔍 Dados Coletados
 
-* Os dados foram registrados via Monitor Serial e exportados em CSV.
+Os dados foram registrados via Monitor Serial e exportados em CSV.
 
-## 📊 Análise e Gráficos
+## Análise e Gráficos
 
 ![Gráfico Temperatura](./analise/grafico_temperatura.png)
 
-## 🚀 Como Executar
+## Como Executar
 
 1. Acesse [https://wokwi.com](https://wokwi.com) e carregue o arquivo `main.ino`.
 2. Configure o ESP32 e os sensores conforme o esquema.
 3. Execute a simulação e acompanhe via Monitor Serial.
 
-## 👨‍👩‍👦‍👦 Integrantes
+## Integrantes
 
-* Nome 1
-* Nome 2
-* Nome 3
-* Nome 4
+Nome 1
+Nome 2
+Nome 3
+Nome 4
 
-## 📜 Licença
+## Licença
 
 MIT License
 
-
 ---
 
-# 📅 KANBAN (CARTÕES)
+## KANBAN (CARTÕES)
 
-### 🔧 Planejamento
+### Planejamento
+
 - [ ] Definir sensores a serem utilizados
 - [ ] Distribuir funções entre os integrantes
 - [ ] Criar repositório no GitHub
 
 ### 🔌 Montagem do Circuito
+
 - [ ] Criar o circuito no Wokwi / PlatformIO
 - [ ] Testar funcionamento dos sensores
 - [ ] Capturar print do circuito
 
 ### 👨‍💻 Programação
+
 - [ ] Programar leitura dos sensores
 - [ ] Implementar impressão no Monitor Serial
 - [ ] Simular diferentes cenários (valores variados)
 
 ### 📑 Coleta de Dados
+
 - [ ] Registrar dados do Monitor Serial
 - [ ] Exportar para CSV
 
 ### 📈 Análise dos Dados
+
 - [ ] Criar gráficos (Python ou R)
 - [ ] Gerar insights iniciais
 
 ### 📄 Documentação
-- [ ] Preencher README
+
+- [ ] Preencher README.md
 - [ ] Organizar imagens, código e dados no repositório
 - [ ] Verificar coerência técnica da documentação
 
 ### 🚀 Finalização
+
 - [ ] Fazer revisão geral
 - [ ] Compartilhar link do GitHub no formulário da turma
