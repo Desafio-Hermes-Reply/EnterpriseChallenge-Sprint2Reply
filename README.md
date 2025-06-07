@@ -95,18 +95,31 @@ Este projeto simula um ambiente industrial digitalizado, utilizando o ESP32 e se
 * Ideal para **sistemas embarcados**, **IoT** ou **telemetria em tempo real**.
 * As unidades de medida podem ser documentadas fora do JSON (ex: no protocolo ou API).
 
-```
 
 ### Tabela de Sensores para Máquinas Industriais com ESP32
 
-| **Sensor**                   | **Descrição**                                           | **Porta ESP32**    | **Alimentação** | **Código Exemplo** |
-|------------------------------|---------------------------------------------------------|--------------------|-----------------|--------------------|
-| **DS18B20 (Temperatura)**    | Sensor digital de temperatura, resistente               | D4 (GPIO4)         | 3.3V ou 5V      | `DallasTemperature` + `OneWire` |
-| **SW-420 (Vibração)**        | Sensor para detecção de impactos e vibrações             | D5 (GPIO5)         | 3.3V ou 5V      | `digitalRead` para detectar vibração |
-| **SCT-013 (Corrente)**       | Transformador de corrente não-invasivo                   | GPIO36 (ADC1_CH0)  | -               | `analogRead` para tensão proporcional |
-| **Encoder Óptico (Rotação)** | Medição de rotação, RPM ou ângulo                        | D18 (GPIO18), D19 (GPIO19) | 5V      | `attachInterrupt` para contagem de pulsos |
-| **HC-SR04 (Nível)**          | Sensor ultrassônico para medição de distância            | TRIG: D12 (GPIO12), ECHO: D14 (GPIO14) | 5V | `pulseIn` para calcular distância |
-| **4-20mA (Pressão)**         | Sensor industrial padrão de pressão com saída analógica | GPIO39 (ADC1_CH3)  | conforme sensor (geralmente 24V) | `analogRead` com resistor shunt de 250Ω |
+| **Sensor**                                | **Descrição**                                                                             | **Porta ESP32**                   | **Alimentação**    | **Código Exemplo**                                      |
+| ----------------------------------------- | ----------------------------------------------------------------------------------------- | --------------------------------- | ------------------ | ------------------------------------------------------- |
+| **DS18B20, PT100 com módulo ADC**         | Sensor de temperatura digital com precisão e fácil integração.                            | GPIO 15 (exemplo)                 | 3.3V               | `OneWire`, `DallasTemperature` (Biblioteca Arduino)     |
+| **ADXL345, MPU6050, SW-420**              | Sensores de aceleração (vibração) e giroscópio (MPU6050), SW-420 é para vibração simples. | I2C: GPIO 21 (SDA), GPIO 22 (SCL) | 3.3V               | `Wire`, `Adafruit_Sensor`, `Adafruit_ADXL345` (Arduino) |
+| **SCT-013, ACS712**                       | Sensores de corrente elétrica para medir consumo e proteger circuitos.                    | GPIO 34 (exemplo)                 | 3.3V               | `ACS712` (Biblioteca Arduino)                           |
+| **Encoder Óptico, AS5600**                | Sensores para medição de rotação e posição de motores/peças.                              | GPIO 12 (exemplo)                 | 3.3V               | `Encoder` (Biblioteca Arduino)                          |
+| **Sensor Indutivo, Óptico, Reed Switch**  | Sensores de proximidade e posição para detectar objetos.                                  | GPIO 4 (exemplo)                  | 3.3V               | `digitalRead()` (Arduino)                               |
+| **Sensor de Pressão Industrial (4-20mA)** | Sensor analógico para medir pressão de sistemas industriais.                              | ADC (ex: GPIO 34, 35)             | 3.3V               | `analogRead()` (Arduino)                                |
+| **Sensor Ultrasônico HC-SR04**            | Sensor de distância por ultrassom, usado para medir o nível de líquidos.                  | GPIO 5 (Trig), GPIO 18 (Echo)     | 5V (via regulador) | `NewPing` (Biblioteca Arduino)                          |
+| **MQ-135, SGP30**                         | Sensores para medir a qualidade do ar, detectando gases tóxicos.                          | I2C: GPIO 21 (SDA), GPIO 22 (SCL) | 3.3V               | `Adafruit_SGP30` (Biblioteca Arduino)                   |
+| **DHT22, SHT31**                          | Sensores de umidade e temperatura para controle ambiental.                                | GPIO 13 (exemplo)                 | 3.3V               | `DHT` ou `SHT31` (Biblioteca Arduino)                   |
+| **ZMPT101B**                              | Sensor de tensão AC, utilizado para medir a tensão elétrica.                              | ADC (ex: GPIO 34, 35)             | 3.3V               | `analogRead()` (Arduino)                                |
+| **MQ-2, Sensor de Chama IR**              | Sensor de gás para detectar fumaça ou incêndio.                                           | GPIO 14 (exemplo)                 | 5V                 | `MQ` (Biblioteca Arduino)                               |
+
+### Explicação de algumas colunas:
+
+* **Porta ESP32**: As portas GPIO fornecidas são exemplos comuns. A **porta I2C** para comunicação com os sensores que utilizam esse protocolo é especificada com `SDA` e `SCL`.
+* **Alimentação**: Indica a voltagem necessária para o sensor (3.3V ou 5V).
+* **Código Exemplo**: O nome da biblioteca é apresentada, que pode ser usada no ambiente Arduino para facilitar a leitura e comunicação com o sensor.
+
+Se precisar de um exemplo de código completo ou mais detalhes sobre como configurar a alimentação ou as portas, posso ajudar também!
+4-20mA (Pressão)**         | Sensor industrial padrão de pressão com saída analógica | GPIO39 (ADC1_CH3)  | conforme sensor (geralmente 24V) | `analogRead` com resistor shunt de 250Ω |
 
 ---
 
