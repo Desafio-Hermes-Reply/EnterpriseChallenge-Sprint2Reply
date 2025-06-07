@@ -293,56 +293,48 @@ void loop() {
 
 ### Esquema do Circuito
 
-#### 1. DS18B20 - Sensor de Temperatura
+### 1. **DS18B20 (Temperatura)**
+- **VCC**: 3.3V do ESP32
+- **GND**: GND do ESP32
+- **Data**: GPIO 15 (ou qualquer pino digital disponível)
 
-- **VCC** → 3.3V (ou 5V)
-- **GND** → GND
-- **DATA** → D4 (GPIO4)
-- **OBS**: Adicionar resistor de **4.7kΩ** entre **DATA** e **VCC** (pull-up).
+### 2. **ADXL345 (Vibração)**
+- **VCC**: 3.3V do ESP32
+- **GND**: GND do ESP32
+- **SDA**: GPIO 21 (I2C SDA)
+- **SCL**: GPIO 22 (I2C SCL)
 
----
+### 3. **ACS712 (Corrente Elétrica)**
+- **VCC**: 5V do ESP32
+- **GND**: GND do ESP32
+- **OUT**: GPIO 34 (pino analógico)
 
-#### 2. SW-420 - Sensor de Vibração
+### 4. **HC-SR04 (Ultrassônico - Nível de Líquido)**
+- **VCC**: 5V do ESP32 (ou 3.3V com regulador de tensão)
+- **GND**: GND do ESP32
+- **Trig**: GPIO 5
+- **Echo**: GPIO 18
 
-- **VCC** → 3.3V (ou 5V)
-- **GND** → GND
-- **DO (Saída Digital)** → D5 (GPIO5)
+### 5. **MQ-135 (Qualidade do Ar)**
+- **VCC**: 5V do ESP32
+- **GND**: GND do ESP32
+- **A0**: GPIO 34 (pino analógico)
 
----
+### 6. **DHT22 (Umidade)**
+- **VCC**: 3.3V do ESP32
+- **GND**: GND do ESP32
+- **Data**: GPIO 13 (ou qualquer pino digital disponível)
 
-#### 3. SCT-013 - Sensor de Corrente
+### 7. **ZMPT101B (Tensão)**
+- **VCC**: 3.3V do ESP32
+- **GND**: GND do ESP32
+- **OUT**: GPIO 34 (pino analógico)
 
-- **Buraco central** → passar o fio fase da carga.
-- **Saída de tensão** → A0 (GPIO36) — entrada analógica.
-- **OBS**: Verificar se o modelo possui carga interna; se não, adicionar resistor de carga conforme especificações (ex.: 33Ω).
+### 8. **MQ-2 (Fumaça/Incêndio)**
+- **VCC**: 5V do ESP32
+- **GND**: GND do ESP32
+- **A0**: GPIO 14 (pino analógico)
 
----
-
-#### 4. Encoder Óptico - Medidor de Rotação
-
-- **VCC** → 5V
-- **GND** → GND
-- **OUT A** → D18 (GPIO18)
-- **OUT B** → D19 (GPIO19)
-
----
-
-#### 5. HC-SR04 - Sensor Ultrassônico (Nível)
-
-- **VCC** → 5V
-- **GND** → GND
-- **TRIG** → D12 (GPIO12)
-- **ECHO** → D14 (GPIO14)
-- **OBS**: Adicionar divisor de tensão no pino **ECHO** (pois ele gera 5V e o ESP32 aceita até 3.3V).
-
----
-
-#### 6. Sensor de Pressão - Saída 4-20mA
-
-- **Saída +** → 24V (fonte externa)
-- **Saída -** → uma ponta do resistor de **250Ω** → GND da fonte.
-- **Entre o resistor** → GPIO39 (ADC1_CH3).
-- **OBS**: A tensão sobre o resistor será proporcional à corrente de loop (1V a 5V).
 
 ---
 
