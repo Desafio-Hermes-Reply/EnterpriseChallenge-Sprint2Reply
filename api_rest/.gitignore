@@ -20,7 +20,6 @@ Thumbs.db
 
 # Python - se estiver fora da pasta sensor
 __pycache__/
-__init__.py
 *.pyc
 *.pyo
 *.pyd
@@ -31,6 +30,7 @@ venv/
 ENV/
 env/
 .venv/
+.env
 
 # Checkpoints do Jupyter Notebook
 .ipynb_checkpoints/
@@ -50,3 +50,4 @@ build/
 pip-wheel-metadata/
 *.egg
 *.whl
+.env
