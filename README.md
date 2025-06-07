@@ -56,19 +56,46 @@ Este projeto simula um ambiente industrial digitalizado, utilizando o ESP32 e se
 
 ### **Sensores utilizados:**
 
-| Finalidade                          | Sensor                                       | Descrição                                                                 |
-|--------------------------------------|---------------------------------------------|---------------------------------------------------------------------------|
-| **Temperatura**                     | DS18B20, PT100 com módulo ADC               | Monitoramento de temperatura de motores, rolamentos e ambientes.          |
-| **Vibração**                        | ADXL345, MPU6050, SW-420                    | Detecção de vibrações anormais que indicam falhas mecânicas.              |
-| **Corrente elétrica**               | SCT-013, ACS712                             | Monitoramento de consumo e proteção contra sobrecarga.                    |
-| **Rotação e Velocidade**            | Encoder Óptico, Encoder Magnético AS5600    | Medição de velocidade de eixos e motores.                                 |
-| **Proximidade e Posição**           | Sensor Indutivo, Óptico, ou Reed Switch     | Detecção de presença, posição ou fim de curso de componentes.             |
-| **Pressão**                         | Sensor de Pressão Industrial (4-20mA)       | Monitoramento de sistemas pneumáticos ou hidráulicos.                     |
-| **Nível de líquidos**               | Sensor Ultrasônico (HC-SR04), Sensor de Boia| Controle e monitoramento de tanques e reservatórios.                      |
-| **Qualidade do Ar**                 | MQ-135, SGP30                               | Detecção de gases tóxicos ou contaminantes no ambiente industrial.        |
-| **Umidade**                         | DHT22, SHT31                                | Controle ambiental em ambientes sensíveis.                                |
-| **Tensão**                          | Sensor de Tensão ZMPT101B                   | Monitoramento de tensão elétrica para diagnóstico e segurança.            |
-| **Detecção de Fumaça ou Incêndio**  | MQ-2, Sensor de Chama IR                    | Sistemas de segurança contra incêndios.                                   |
+
+| Finalidade                         | Sensor                                       | Descrição                                                          | Nome da Variável (JSON) | Unidade de Medida         |
+| ---------------------------------- | -------------------------------------------- | ------------------------------------------------------------------ | ----------------------- | ------------------------- |
+| **Temperatura**                    | DS18B20, PT100 com módulo ADC                | Monitoramento de temperatura de motores, rolamentos e ambientes.   | `temperatura`           | °C (graus Celsius)        |
+| **Vibração**                       | ADXL345, MPU6050, SW-420                     | Detecção de vibrações anormais que indicam falhas mecânicas.       | `vibracao`              | m/s² (aceleração)         |
+| **Corrente elétrica**              | SCT-013, ACS712                              | Monitoramento de consumo e proteção contra sobrecarga.             | `corrente`              | A (ampère)                |
+| **Rotação e Velocidade**           | Encoder Óptico, Encoder Magnético AS5600     | Medição de velocidade de eixos e motores.                          | `velocidade`            | RPM (rotações por minuto) |
+| **Proximidade e Posição**          | Sensor Indutivo, Óptico, ou Reed Switch      | Detecção de presença, posição ou fim de curso de componentes.      | `posicao`               | mm ou estado binário      |
+| **Pressão**                        | Sensor de Pressão Industrial (4-20mA)        | Monitoramento de sistemas pneumáticos ou hidráulicos.              | `pressao`               | bar ou psi                |
+| **Nível de líquidos**              | Sensor Ultrasônico (HC-SR04), Sensor de Boia | Controle e monitoramento de tanques e reservatórios.               | `nivel`                 | cm ou %                   |
+| **Qualidade do Ar**                | MQ-135, SGP30                                | Detecção de gases tóxicos ou contaminantes no ambiente industrial. | `qualidade_ar`          | ppm (partes por milhão)   |
+| **Umidade**                        | DHT22, SHT31                                 | Controle ambiental em ambientes sensíveis.                         | `umidade`               | % (umidade relativa)      |
+| **Tensão**                         | Sensor de Tensão ZMPT101B                    | Monitoramento de tensão elétrica para diagnóstico e segurança.     | `tensao`                | V (volts)                 |
+| **Detecção de Fumaça ou Incêndio** | MQ-2, Sensor de Chama IR                     | Sistemas de segurança contra incêndios.                            | `fumaca`                | ppm ou estado binário     |
+
+
+
+```json
+{
+  "temperatura": 36.5,
+  "vibracao": 2.3,
+  "corrente": 5.8,
+  "velocidade": 1450,
+  "posicao": 1,
+  "pressao": 6.2,
+  "nivel": 78,
+  "qualidade_ar": 350,
+  "umidade": 48.2,
+  "tensao": 220.5,
+  "fumaca": 0
+}
+```
+
+### Vantagens:
+
+* **Mais leve** e rápido para transmitir.
+* Ideal para **sistemas embarcados**, **IoT** ou **telemetria em tempo real**.
+* As unidades de medida podem ser documentadas fora do JSON (ex: no protocolo ou API).
+
+```
 
 ### Tabela de Sensores para Máquinas Industriais com ESP32
 
