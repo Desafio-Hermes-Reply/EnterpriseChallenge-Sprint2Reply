@@ -1,6 +1,6 @@
 # FireGuard – Monitor de Solo Inteligente
 
-Este projeto utiliza um ESP32 para ler múltiplos sensores de solo e ambiente, tomar decisões de irrigação e exibir tudo num display LCD 16×2 via I²C.
+Este projeto utiliza um ESP32 para ler múltiplos sensores de solo e ambiente e exibir tudo num display LCD 16×2 via I²C.
 
 **Simule online no Wokwi:**  
 https://wokwi.com/projects/432651667244765185
