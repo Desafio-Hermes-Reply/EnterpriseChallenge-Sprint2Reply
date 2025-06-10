@@ -10,30 +10,153 @@ Em resumo, os sensores são os elementos-chave que impulsionam a transformação
 
 ## ESTRUTURA DO PROJETO (GitHub)
 
-```desafio-hermes-reply-fase4/
-├── 📁 circuito/
-│   ├── circuito.png            # Print do circuito montado no Wokwi (ou plataforma utilizada)
-│   └── esquema.pdf             # (Opcional) Esquema elétrico desenhado
-├── 📁 codigo/
-│   ├── main.ino                # Código-fonte ESP32
-│   ├── platformio.ini          # Arquivo de configuração (se usar PlatformIO)
-│   └── README.md               # Descrição do código e instruções de execução
-├── 📁 dados/
-│   ├── dados_coletados.csv     # Dados coletados da simulação
-│   └── dados_exemplares.xlsx   # Dados de exemplo (se usar Kaggle ou gerar manualmente)
-├── 📁 sensores/
-│   ├── dados_coletados.csv     # Dados coletados da simulação
-│   └── dados_exemplares.xlsx   # Dados de exemplo (se usar Kaggle ou gerar manualmente)
-├── 📁 analise/
-│   ├── grafico_temperatura.png # Gráficos gerados na análise
-│   ├── analise.ipynb           # Código Python ou R para análise dos dados
-│   └── README.md               # Descrição dos insights da análise
-├── 📁 imagens/
-│   └── monitor_serial.png      # Print do monitor serial com dados
-├── README.md                   # Arquivo principal com resumo do projeto
-└── LICENSE                     # (Opcional) Licença do projeto
-└── .gitignore                     # (Opcional) Licença do projeto
+Claro! Abaixo está um arquivo `README.md` completo em **Markdown**, unificando e explicando toda a estrutura do seu projeto, incluindo o backend, os sensores (firmware) e a análise de dados com notebooks e scripts.
+
+---
+
+```markdown
+# 🌡️ Projeto de Monitoramento com Sensores e API REST
+
+Este projeto integra sensores físicos, análise de dados e uma API RESTful para coletar, processar e expor informações sobre variáveis ambientais como temperatura, umidade, fumaça e vibração. É dividido em três partes principais: firmware embarcado, backend com Django REST e análise com Python/Notebooks.
+
+---
+
+## 📁 Estrutura Geral do Projeto
+
 ```
+
+.
+├── api\_rest/                  # Backend com Django REST Framework
+├── notebooks/                # Notebooks Jupyter para análise de dados
+├── sensores/                 # Firmware embarcado (Arduino/ESP com PlatformIO)
+├── src/                      # Scripts auxiliares (ETL, download de dados)
+
+```
+
+---
+
+## 🔧 API REST – `api_rest/`
+
+Backend construído com Django e Django REST Framework.
+
+### Estrutura:
+
+```
+
+api\_rest/
+├── api\_sensor/               # App principal da API
+│   ├── migrations/           # Arquivos de migração do Django
+│   ├── admin.py              # Registro no admin do Django
+│   ├── apps.py               # Configurações do app
+│   ├── models.py             # Definição dos modelos (banco de dados)
+│   ├── serializers.py        # Serialização dos modelos para JSON
+│   ├── tests.py              # Testes automatizados
+│   ├── urls.py               # Rotas específicas da API
+│   └── views.py              # Lógica de negócios (endpoints)
+├── src/
+│   ├── asgi.py               # Entrada ASGI (async server)
+│   ├── settings.py           # Configurações gerais do projeto Django
+│   ├── urls.py               # Rotas principais do projeto
+│   └── wsgi.py               # Entrada WSGI (servidor web padrão)
+├── staticfiles/              # Arquivos estáticos coletados
+├── .env                      # Variáveis de ambiente (segredos, chaves)
+├── .gitignore                # Arquivos ignorados pelo Git
+├── LICENSE                   # Licença do projeto
+├── Procfile                  # Configuração para deploy (ex: Heroku)
+├── README.md                 # Este arquivo
+├── manage.py                 # CLI do Django
+├── requirements.txt          # Bibliotecas Python usadas
+└── runtime.txt               # Versão do Python usada
+
+```
+
+---
+
+## 📟 Sensores e Firmware – `sensores/`
+
+Código para microcontroladores (ex: ESP32/ESP8266/Arduino), simulável via Wokwi ou executável no hardware real com PlatformIO.
+
+### Estrutura:
+
+```
+
+sensores/
+├── src/
+│   └── prog1.ino             # Código-fonte do sensor (Arduino/ESP)
+├── .gitignore                # Itens ignorados no controle de versão
+├── README.md                 # Descrição do código e circuito
+├── circuito.png              # Esquema do circuito eletrônico
+├── diagram.json              # Diagrama (para Wokwi ou Fritzing)
+├── platformio.ini            # Configuração do projeto PlatformIO
+└── wokwi.toml                # Configuração de simulação Wokwi
+
+```
+
+---
+
+## 📊 Análise de Dados – `notebooks/` e `src/`
+
+Scripts e notebooks para análise estatística e manipulação dos dados dos sensores.
+
+### Estrutura:
+
+```
+
+notebooks/
+├── stats\_sensor.ipynb        # Notebook com análise estatística e visualizações
+
+src/
+├── download\_datasets.py      # Script para baixar datasets
+├── load\_data.py              # Pré-processamento e carregamento dos dados
+├── LICENSE                   # Licença
+├── README.md                 # Explicação dos scripts
+├── requirements.txt          # Dependências dos scripts
+└── .gitignore                # Arquivos ignorados
+
+````
+
+---
+
+## 📈 Exemplo de Análise – Correlação
+
+O projeto inclui uma análise de correlação linear entre variáveis numéricas dos sensores. Isso permite entender relações como:
+
+- **Temperatura vs Pressão**: correlação negativa forte (-0.68)
+- **Posição vs Pressão**: correlação positiva muito forte (0.97)
+- **Velocidade vs Temperatura**: correlação moderada positiva (0.46)
+
+Essas correlações ajudam a prever ou reagir a condições ambientais com base em múltiplas variáveis.
+
+---
+
+## 🚀 Como Rodar
+
+### 1. Backend
+
+```bash
+cd api_rest
+pip install -r requirements.txt
+python manage.py migrate
+python manage.py runserver
+````
+
+### 2. Firmware (Sensores)
+
+* Use o [PlatformIO](https://platformio.org/) ou [Wokwi](https://wokwi.com/) para simular/testar `prog1.ino`.
+
+### 3. Análise de Dados
+
+```bash
+cd notebooks
+jupyter notebook
+```
+
+Ou execute os scripts em `src/` diretamente:
+
+```bash
+python src/load_data.py
+```
+
 
 ---
 
