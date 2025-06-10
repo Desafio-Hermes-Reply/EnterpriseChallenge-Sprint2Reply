@@ -14,7 +14,7 @@ Claro! Abaixo está um arquivo `README.md` completo em **Markdown**, unificando 
 
 ---
 
-```markdown
+
 # 🌡️ Projeto de Monitoramento com Sensores e API REST
 
 Este projeto integra sensores físicos, análise de dados e uma API RESTful para coletar, processar e expor informações sobre variáveis ambientais como temperatura, umidade, fumaça e vibração. É dividido em três partes principais: firmware embarcado, backend com Django REST e análise com Python/Notebooks.
