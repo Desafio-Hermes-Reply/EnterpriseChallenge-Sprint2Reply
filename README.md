@@ -1,4 +1,55 @@
-# EnterpriseChallenge-Sprint2Reply
+# FIAP - Faculdade de Informática e Administração Paulista 
+
+<p align="center">
+  <a href="https://www.fiap.com.br/">
+    <img src="assets/logo-fiap.png" alt="FIAP" width="40%">
+  </a>
+</p>
+
+
+<br>
+
+# 🌡️ Projeto de Monitoramento com Sensores e API REST
+## 👨‍🎓 Integrantes: 
+- Vitor Eiji Fernandes Teruia
+```
+- RM: rm563683
+- E-mail: vitorfer2018@gmail.com
+- GitHub: [@Vitor985-hub](https://github.com/Vitor985-hub)
+```
+- Beatriz Pilecarte de Melo
+```
+ - RM: rm564952
+ - E-mail: beatrizpilecartedemelo@gmail.com
+ - GitHub: [@BPilecarte](https://github.com/BPilecarte)
+```
+- Francismar Alves Martins Junior
+```
+ - RM: m562869
+ - E-mail: yggdrasil.git@gmail.com
+ - GitHub: [@yggdrasilGit](https://github.com/yggdrasilGit
+```
+- Antônio Ancelmo Neto barros
+```
+ - RM: rm563683
+ - E-mail: antonio.anbarros@gmail.com
+ - GitHub: [@AntonioBarros19](https://github.com/AntonioBarros19)
+```
+- Matheus Soares Bento da Silva
+```
+ - RM: rm565540
+ - E-mail: matheusbento044@gmail.com
+ - GitHub: [matheusbento044](https://github.com/matheusbento04)
+```
+
+## 👩‍🏫 Professores:
+### Tutor(a) 
+- <a href="https://www.linkedin.com/in/leonardoorabona/">Leonardo Ruiz Orabona</a>
+### Coordenador(a)
+- <a href="https://www.linkedin.com/company/inova-fusc">ANDRÉ GODOI CHIOVATO</a>
+
+
+## 📜 Descrição
 
 Os sensores desempenham um papel fundamental na Indústria 4.0, pois são responsáveis por transformar fenômenos físicos em dados digitais, permitindo que máquinas, sistemas e processos se tornem inteligentes e autônomos. Eles viabilizam a coleta contínua e precisa de informações sobre variáveis como temperatura, pressão, vibração, umidade, entre outras, essenciais para o monitoramento e controle em tempo real das operações industriais.
 
@@ -6,22 +57,30 @@ Essa capacidade de sensoriamento possibilita a implementação de soluções ava
 
 Em resumo, os sensores são os elementos-chave que impulsionam a transformação digital nas indústrias, tornando possível a evolução para fábricas inteligentes, mais produtivas, seguras e sustentáveis.
 
----
-
-## ESTRUTURA DO PROJETO (GitHub)
-
-Claro! Abaixo está um arquivo `README.md` completo em **Markdown**, unificando e explicando toda a estrutura do seu projeto, incluindo o backend, os sensores (firmware) e a análise de dados com notebooks e scripts.
-
----
-
-
-# 🌡️ Projeto de Monitoramento com Sensores e API REST
-
 Este projeto integra sensores físicos, análise de dados e uma API RESTful para coletar, processar e expor informações sobre variáveis ambientais como temperatura, umidade, fumaça e vibração. É dividido em três partes principais: firmware embarcado, backend com Django REST e análise com Python/Notebooks.
 
+### **Sensores utilizados:**
+
+
+| Finalidade                         | Sensor                                       | Descrição                                                          | Nome da Variável (JSON) | Unidade de Medida         |
+| ---------------------------------- | -------------------------------------------- | ------------------------------------------------------------------ | ----------------------- | ------------------------- |
+| **Temperatura**                    | DS18B20, PT100 com módulo ADC                | Monitoramento de temperatura de motores, rolamentos e ambientes.   | `temperatura`           | °C (graus Celsius)        |
+| **Vibração**                       | ADXL345, MPU6050, SW-420                     | Detecção de vibrações anormais que indicam falhas mecânicas.       | `vibracao`              | m/s² (aceleração)         |
+| **Corrente elétrica**              | SCT-013, ACS712                              | Monitoramento de consumo e proteção contra sobrecarga.             | `corrente`              | A (ampère)                |
+| **Rotação e Velocidade**           | Encoder Óptico, Encoder Magnético AS5600     | Medição de velocidade de eixos e motores.                          | `velocidade`            | RPM (rotações por minuto) |
+| **Proximidade e Posição**          | Sensor Indutivo, Óptico, ou Reed Switch      | Detecção de presença, posição ou fim de curso de componentes.      | `posicao`               | mm ou estado binário      |
+| **Pressão**                        | Sensor de Pressão Industrial (4-20mA)        | Monitoramento de sistemas pneumáticos ou hidráulicos.              | `pressao`               | bar ou psi                |
+| **Nível de líquidos**              | Sensor Ultrasônico (HC-SR04), Sensor de Boia | Controle e monitoramento de tanques e reservatórios.               | `nivel`                 | cm ou %                   |
+| **Qualidade do Ar**                | MQ-135, SGP30                                | Detecção de gases tóxicos ou contaminantes no ambiente industrial. | `qualidade_ar`          | ppm (partes por milhão)   |
+| **Umidade**                        | DHT22, SHT31                                 | Controle ambiental em ambientes sensíveis.                         | `umidade`               | % (umidade relativa)      |
+| **Tensão**                         | Sensor de Tensão ZMPT101B                    | Monitoramento de tensão elétrica para diagnóstico e segurança.     | `tensao`                | V (volts)                 |
+| **Detecção de Fumaça ou Incêndio** | MQ-2, Sensor de Chama IR                     | Sistemas de segurança contra incêndios.                            | `fumaca`                | ppm ou estado binário     |
+
+
+
 ---
 
-## 📁 Estrutura Geral do Projeto
+## 📁 Estrutura geral do projeto
 
 ```
 
@@ -160,356 +219,18 @@ python src/load_data.py
 
 ---
 
-## Desafio Hermes Reply - Fase 4 🚀
-
-## Descrição
-
-Este projeto simula um ambiente industrial digitalizado, utilizando o ESP32 e sensores virtuais. A proposta é coletar dados de sensores simulados, analisar e gerar insights, replicando cenários da Indústria 4.0.
-
-## Objetivos
-
-- Construir um circuito simulado com ESP32.
-- Realizar a leitura de sensores virtuais.
-- Coletar e exportar dados para análise.
-- Gerar gráficos e insights iniciais.
-
-## Circuito
-
-- **Plataforma:** Wokwi / PlatformIO / VSCode
-
-### **Sensores utilizados:**
-
-
-| Finalidade                         | Sensor                                       | Descrição                                                          | Nome da Variável (JSON) | Unidade de Medida         |
-| ---------------------------------- | -------------------------------------------- | ------------------------------------------------------------------ | ----------------------- | ------------------------- |
-| **Temperatura**                    | DS18B20, PT100 com módulo ADC                | Monitoramento de temperatura de motores, rolamentos e ambientes.   | `temperatura`           | °C (graus Celsius)        |
-| **Vibração**                       | ADXL345, MPU6050, SW-420                     | Detecção de vibrações anormais que indicam falhas mecânicas.       | `vibracao`              | m/s² (aceleração)         |
-| **Corrente elétrica**              | SCT-013, ACS712                              | Monitoramento de consumo e proteção contra sobrecarga.             | `corrente`              | A (ampère)                |
-| **Rotação e Velocidade**           | Encoder Óptico, Encoder Magnético AS5600     | Medição de velocidade de eixos e motores.                          | `velocidade`            | RPM (rotações por minuto) |
-| **Proximidade e Posição**          | Sensor Indutivo, Óptico, ou Reed Switch      | Detecção de presença, posição ou fim de curso de componentes.      | `posicao`               | mm ou estado binário      |
-| **Pressão**                        | Sensor de Pressão Industrial (4-20mA)        | Monitoramento de sistemas pneumáticos ou hidráulicos.              | `pressao`               | bar ou psi                |
-| **Nível de líquidos**              | Sensor Ultrasônico (HC-SR04), Sensor de Boia | Controle e monitoramento de tanques e reservatórios.               | `nivel`                 | cm ou %                   |
-| **Qualidade do Ar**                | MQ-135, SGP30                                | Detecção de gases tóxicos ou contaminantes no ambiente industrial. | `qualidade_ar`          | ppm (partes por milhão)   |
-| **Umidade**                        | DHT22, SHT31                                 | Controle ambiental em ambientes sensíveis.                         | `umidade`               | % (umidade relativa)      |
-| **Tensão**                         | Sensor de Tensão ZMPT101B                    | Monitoramento de tensão elétrica para diagnóstico e segurança.     | `tensao`                | V (volts)                 |
-| **Detecção de Fumaça ou Incêndio** | MQ-2, Sensor de Chama IR                     | Sistemas de segurança contra incêndios.                            | `fumaca`                | ppm ou estado binário     |
-
-
-
-```json
-{
-  "temperatura": 36.5,
-  "vibracao": 2.3,
-  "corrente": 5.8,
-  "velocidade": 1450,
-  "posicao": 1,
-  "pressao": 6.2,
-  "nivel": 78,
-  "qualidade_ar": 350,
-  "umidade": 48.2,
-  "tensao": 220.5,
-  "fumaca": 0
-}
-```
-
-### Vantagens:
-
-* **Mais leve** e rápido para transmitir.
-* Ideal para **sistemas embarcados**, **IoT** ou **telemetria em tempo real**.
-* As unidades de medida podem ser documentadas fora do JSON (ex: no protocolo ou API).
-
-
-### Tabela de Sensores para Máquinas Industriais com ESP32
-
-| **Sensor**                                | **Descrição**                                                                             | **Porta ESP32**                   | **Alimentação**    | **Código Exemplo**                                      |
-| ----------------------------------------- | ----------------------------------------------------------------------------------------- | --------------------------------- | ------------------ | ------------------------------------------------------- |
-| **DS18B20, PT100 com módulo ADC**         | Sensor de temperatura digital com precisão e fácil integração.                            | GPIO 15 (exemplo)                 | 3.3V               | `OneWire`, `DallasTemperature` (Biblioteca Arduino)     |
-| **ADXL345, MPU6050, SW-420**              | Sensores de aceleração (vibração) e giroscópio (MPU6050), SW-420 é para vibração simples. | I2C: GPIO 21 (SDA), GPIO 22 (SCL) | 3.3V               | `Wire`, `Adafruit_Sensor`, `Adafruit_ADXL345` (Arduino) |
-| **SCT-013, ACS712**                       | Sensores de corrente elétrica para medir consumo e proteger circuitos.                    | GPIO 34 (exemplo)                 | 3.3V               | `ACS712` (Biblioteca Arduino)                           |
-| **Encoder Óptico, AS5600**                | Sensores para medição de rotação e posição de motores/peças.                              | GPIO 12 (exemplo)                 | 3.3V               | `Encoder` (Biblioteca Arduino)                          |
-| **Sensor Indutivo, Óptico, Reed Switch**  | Sensores de proximidade e posição para detectar objetos.                                  | GPIO 4 (exemplo)                  | 3.3V               | `digitalRead()` (Arduino)                               |
-| **Sensor de Pressão Industrial (4-20mA)** | Sensor analógico para medir pressão de sistemas industriais.                              | ADC (ex: GPIO 34, 35)             | 3.3V               | `analogRead()` (Arduino)                                |
-| **Sensor Ultrasônico HC-SR04**            | Sensor de distância por ultrassom, usado para medir o nível de líquidos.                  | GPIO 5 (Trig), GPIO 18 (Echo)     | 5V (via regulador) | `NewPing` (Biblioteca Arduino)                          |
-| **MQ-135, SGP30**                         | Sensores para medir a qualidade do ar, detectando gases tóxicos.                          | I2C: GPIO 21 (SDA), GPIO 22 (SCL) | 3.3V               | `Adafruit_SGP30` (Biblioteca Arduino)                   |
-| **DHT22, SHT31**                          | Sensores de umidade e temperatura para controle ambiental.                                | GPIO 13 (exemplo)                 | 3.3V               | `DHT` ou `SHT31` (Biblioteca Arduino)                   |
-| **ZMPT101B**                              | Sensor de tensão AC, utilizado para medir a tensão elétrica.                              | ADC (ex: GPIO 34, 35)             | 3.3V               | `analogRead()` (Arduino)                                |
-| **MQ-2, Sensor de Chama IR**              | Sensor de gás para detectar fumaça ou incêndio.                                           | GPIO 14 (exemplo)                 | 5V                 | `MQ` (Biblioteca Arduino)                               |
-
-### Explicação de algumas colunas:
-
-* **Porta ESP32**: As portas GPIO fornecidas são exemplos comuns. A **porta I2C** para comunicação com os sensores que utilizam esse protocolo é especificada com `SDA` e `SCL`.
-* **Alimentação**: Indica a voltagem necessária para o sensor (3.3V ou 5V).
-* **Código Exemplo**: O nome da biblioteca é apresentada, que pode ser usada no ambiente Arduino para facilitar a leitura e comunicação com o sensor.
-
-Se precisar de um exemplo de código completo ou mais detalhes sobre como configurar a alimentação ou as portas, posso ajudar também!
-4-20mA (Pressão)**         | Sensor industrial padrão de pressão com saída analógica | GPIO39 (ADC1_CH3)  | conforme sensor (geralmente 24V) | `analogRead` com resistor shunt de 250Ω |
-
----
-
-## Códigos por Sensor
-
-### **DS18B20 - Temperatura**
-
-```cpp
-#include <OneWire.h>
-#include <DallasTemperature.h>
-
-#define ONE_WIRE_BUS 4
-OneWire oneWire(ONE_WIRE_BUS);
-DallasTemperature sensors(&oneWire);
-
-void setup() {
-  Serial.begin(115200);
-  sensors.begin();
-}
-
-void loop() {
-  sensors.requestTemperatures();
-  Serial.println(sensors.getTempCByIndex(0));
-  delay(1000);
-}
-```
-
----
-
-### **SW-420 - Vibração**
-
-```cpp
-#define VIBRATION_PIN 5
-
-void setup() {
-  Serial.begin(115200);
-  pinMode(VIBRATION_PIN, INPUT);
-}
-
-void loop() {
-  if (digitalRead(VIBRATION_PIN) == LOW) {
-    Serial.println("Vibração detectada!");
-  }
-  delay(200);
-}
-```
-
----
-
-### **SCT-013 - Corrente**
-
-```cpp
-#define CURRENT_SENSOR_PIN 36
-
-void setup() {
-  Serial.begin(115200);
-}
-
-void loop() {
-  int sensorValue = analogRead(CURRENT_SENSOR_PIN);
-  float voltage = sensorValue * (3.3 / 4095.0);
-  Serial.println(voltage);
-  delay(1000);
-}
-```
-
----
-
-### **Encoder Óptico - Rotação**
-
-```cpp
-#define ENCODER_A 18
-#define ENCODER_B 19
-
-volatile int encoderCount = 0;
-
-void IRAM_ATTR handleEncoder() {
-  encoderCount++;
-}
-
-void setup() {
-  Serial.begin(115120);
-  pinMode(ENCODER_A, INPUT_PULLUP);
-  pinMode(ENCODER_B, INPUT_PULLUP);
-  attachInterrupt(digitalPinToInterrupt(ENCODER_A), handleEncoder, RISING);
-}
-
-void loop() {
-  Serial.println(encoderCount);
-  delay(1000);
-}
-```
-
----
-
-### **HC-SR04 - Nível**
-
-```cpp
-#define TRIG_PIN 12
-#define ECHO_PIN 14
-
-void setup() {
-  Serial.begin(115200);
-  pinMode(TRIG_PIN, OUTPUT);
-  pinMode(ECHO_PIN, INPUT);
-}
-
-void loop() {
-  digitalWrite(TRIG_PIN, LOW);
-  delayMicroseconds(2);
-  digitalWrite(TRIG_PIN, HIGH);
-  delayMicroseconds(10);
-  digitalWrite(TRIG_PIN, LOW);
-
-  long duration = pulseIn(ECHO_PIN, HIGH);
-  float distance = (duration * 0.0343) / 2;
-
-  Serial.println(distance);
-  delay(1000);
-}
-```
-
----
-
-### **4-20mA - Pressão**
-
-```cpp
-#define PRESSURE_SENSOR_PIN 39
-
-void setup() {
-  Serial.begin(115200);
-}
-
-void loop() {
-  int sensorValue = analogRead(PRESSURE_SENSOR_PIN);
-  float voltage = sensorValue * (3.3 / 4095.0);
-  float current = voltage / 250.0; // Resistor shunt de 250Ω
-  Serial.print("Corrente: ");
-  Serial.println(current, 3);
-  delay(1000);
-}
-```
-
-## Código
-
-- Linguagem: C++ (Arduino IDE)
-- Principais funções:
-  - Leitura de sensores
-  - Impressão no Monitor Serial
-  - Simulação de dados
-
-```cpp
-#include <DHT.h>
-
-#define DHTPIN 15
-#define DHTTYPE DHT22
-DHT dht(DHTPIN, DHTTYPE);
-
-void setup() {
-  Serial.begin(9600);
-  dht.begin();
-}
-
-void loop() {
-  float temp = dht.readTemperature();
-  Serial.print("Temperatura: ");
-  Serial.println(temp);
-  delay(2000);
-}
-```
-
-### Esquema do Circuito
-
-### 1. **DS18B20 (Temperatura)**
-- **VCC**: 3.3V do ESP32
-- **GND**: GND do ESP32
-- **Data**: GPIO 15 (ou qualquer pino digital disponível)
-
-### 2. **ADXL345 (Vibração)**
-- **VCC**: 3.3V do ESP32
-- **GND**: GND do ESP32
-- **SDA**: GPIO 21 (I2C SDA)
-- **SCL**: GPIO 22 (I2C SCL)
-
-### 3. **ACS712 (Corrente Elétrica)**
-- **VCC**: 5V do ESP32
-- **GND**: GND do ESP32
-- **OUT**: GPIO 34 (pino analógico)
-
-### 4. **HC-SR04 (Ultrassônico - Nível de Líquido)**
-- **VCC**: 5V do ESP32 (ou 3.3V com regulador de tensão)
-- **GND**: GND do ESP32
-- **Trig**: GPIO 5
-- **Echo**: GPIO 18
-
-### 5. **MQ-135 (Qualidade do Ar)**
-- **VCC**: 5V do ESP32
-- **GND**: GND do ESP32
-- **A0**: GPIO 34 (pino analógico)
-
-### 6. **DHT22 (Umidade)**
-- **VCC**: 3.3V do ESP32
-- **GND**: GND do ESP32
-- **Data**: GPIO 13 (ou qualquer pino digital disponível)
-
-### 7. **ZMPT101B (Tensão)**
-- **VCC**: 3.3V do ESP32
-- **GND**: GND do ESP32
-- **OUT**: GPIO 34 (pino analógico)
-
-### 8. **MQ-2 (Fumaça/Incêndio)**
-- **VCC**: 5V do ESP32
-- **GND**: GND do ESP32
-- **A0**: GPIO 14 (pino analógico)
-
-
----
-
-### Código
-
-- Linguagem: C++ (Arduino IDE)
-- Principais funções:
-  - Leitura de sensores
-  - Impressão no Monitor Serial
-  - Simulação de dados
-
-```cpp
-#include <DHT.h>
-
-#define DHTPIN 15
-#define DHTTYPE DHT22
-DHT dht(DHTPIN, DHTTYPE);
-
-void setup() {
-  Serial.begin(9600);
-  dht.begin();
-}
-
-void loop() {
-  float temp = dht.readTemperature();
-  Serial.print("Temperatura: ");
-  Serial.println(temp);
-  delay(2000);
-}
-```
-
 ## 🔍 Dados Coletados
 
 Os dados foram registrados via Monitor Serial e exportados em CSV.
 
-## Análise e Gráficos
+## 
+## 🗃 Histórico de lançamentos
 
-![Gráfico Temperatura](./analise/grafico_temperatura.png)
+* 0.1.0 - 14/05/2025
 
-## Como Executar
+## 📋 Licença
 
-1. Acesse [https://wokwi.com](https://wokwi.com) e carregue o arquivo `main.ino`.
-2. Configure o ESP32 e os sensores conforme o esquema.
-3. Execute a simulação e acompanhe via Monitor Serial.
+<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://github.com/agodoi/template">MODELO GIT FIAP</a> por <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://fiap.com.br">Fiap</a> está licenciado sobre <a href="http://creativecommons.org/licenses/by/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">Attribution 4.0 International</a>.</p>
 
-## Integrantes
 
-Nome 1
-Nome 2
-Nome 3
-Nome 4
 
-## Licença
-
-MIT License
