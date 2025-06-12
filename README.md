@@ -75,8 +75,11 @@ Este projeto integra sensores físicos, análise de dados e uma API RESTful para
 | **Umidade**                        | DHT22, SHT31                                 | Controle ambiental em ambientes sensíveis.                         | `umidade`               | % (umidade relativa)      |
 | **Tensão**                         | Sensor de Tensão ZMPT101B                    | Monitoramento de tensão elétrica para diagnóstico e segurança.     | `tensao`                | V (volts)                 |
 | **Detecção de Fumaça ou Incêndio** | MQ-2, Sensor de Chama IR                     | Sistemas de segurança contra incêndios.                            | `fumaca`                | ppm ou estado binário     |
+---
 
+### **Imagem do Sensor**
 
+<img src="assets/Captura de tela 2025-06-11 220721.png" alt="Sensor geral" width="600">
 
 ---
 
@@ -226,7 +229,7 @@ Os dados foram registrados via Monitor Serial e exportados em CSV.
 ## 
 ## 🗃 Histórico de lançamentos
 
-* 0.1.0 - 14/05/2025
+* 0.1.0 - 11/06/2025
 
 ## 📋 Licença
 
