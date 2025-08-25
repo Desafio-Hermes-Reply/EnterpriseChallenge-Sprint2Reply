@@ -64,7 +64,7 @@
 
 ### Modelo Lógico
 
-<img width="894" height="769" alt="logical_model_db_sprint3" src="https://github.com/user-attachments/assets/eff962a7-421d-4c37-9cf5-06dd40d4ac02" />
+<img width="710" height="608" alt="logical_model_db_sprint3" src="https://github.com/user-attachments/assets/2b69592f-1dd2-405c-8f52-60289428583f" />
 
 ### Modelo Relacional
 
